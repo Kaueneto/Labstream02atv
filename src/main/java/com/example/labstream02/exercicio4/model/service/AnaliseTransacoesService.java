@@ -6,32 +6,35 @@ import java.util.stream.Collectors;
 
 public class AnaliseTransacoesService {
 
+    // 1. Filtrar transações por tipo
     public List<Transacao> filtrarPorTipo(List<Transacao> transacoes, String tipo) {
         return transacoes.stream()
-                .filter(t -> t.getTipo().equalsIgnoreCase(tipo))
+                .filter(t -> t.getTipoTransacao().equalsIgnoreCase(tipo))
                 .collect(Collectors.toList());
     }
 
+    // 2. Mapear para lista de valores
     public List<Double> getValoresTransacoes(List<Transacao> transacoes) {
         return transacoes.stream()
                 .map(Transacao::getValor)
                 .collect(Collectors.toList());
     }
 
-    // Calcula total por tipo
-    public double calculatotalPortipo(List<Transacao> transacoes, String tipo) {
+    // 3. Calcular total por tipo
+    public double calcularTotalPorTipo(List<Transacao> transacoes, String tipo) {
         return filtrarPorTipo(transacoes, tipo).stream()
                 .mapToDouble(Transacao::getValor)
                 .sum();
     }
 
-    // Imprime resumo de transações
+    // 4. Imprimir resumo de débitos e créditos
     public void imprimirResumoTransacoes(List<Transacao> transacoes) {
-        double totalCreditos = calculatotalPortipo(transacoes, "crédito");
-        double totalDebitos = calculatotalPortipo(transacoes, "débito");
+        double totalCreditos = calcularTotalPorTipo(transacoes, "crédito");
+        double totalDebitos = calcularTotalPorTipo(transacoes, "débito");
 
-        System.out.println("Total Créditos: R$" + totalCreditos);
-        System.out.println("Total Débitos: R$" + totalDebitos);
-        System.out.println("Saldo: R$" + (totalCreditos - totalDebitos));
+        System.out.println("\n💳 RESUMO FINANCEIRO:");
+        System.out.printf("Créditos: R$%.2f%n", totalCreditos);
+        System.out.printf("Débitos: R$%.2f%n", totalDebitos);
+        System.out.printf("Saldo: R$%.2f%n", (totalCreditos - totalDebitos));
     }
 }

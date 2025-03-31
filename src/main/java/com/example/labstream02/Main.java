@@ -22,10 +22,10 @@ public class Main {
 
         while (true) {
             System.out.println("Menu:");
-            System.out.println("1 - Processamento de Pedidos");
-            System.out.println("2 - Gerenciamento de Tarefas");
-            System.out.println("3 - Análise de Desempenho");
-            System.out.println("4 - Análise de Transações");
+            System.out.println("1 - Processamento de Pedidos de compras");
+            System.out.println("2 - Gerenciamento de Tarefas de projeto");
+            System.out.println("3 - Análise de Desempenho funcionarios");
+            System.out.println("4 - Análise de Transações bancarias");
             System.out.println("0 - Sair");
             System.out.print("Escolha um exercicio a ser resolvido: ");
 
@@ -46,6 +46,7 @@ public class Main {
         }
     }
 
+
     // comecando os exercicios aqui
     private static void exercicio1() {
         System.out.println("EXERCICIO 01: PROCESSAMENTO DE PEDIDOS DE COMPRAS 🛒");
@@ -56,11 +57,11 @@ public class Main {
                 new Item("MOUSE SEM FIO OPTICO 3200 DPI USB WIRELESS", 120.00),
                 new Item("TECLADO MULTILASER SLIM USB PRETO", 350.00)
         );
-        Pedido pedido1 = new Pedido("Maria Oliveira", itensPedido1, true);
+        Pedido pedido1 = new Pedido("MARIA OLIVEIRA", itensPedido1, true);
 
 
         List<Item> itensPedido2 = List.of(
-                new Item("Caneta Esferográfica Azul", 100.00)
+                new Item("NOTEBOOK ACER ASPIRE ", 100.00)
         );
         Pedido pedido2 = new Pedido("Jucelino Kubitschek", itensPedido2, false);
 
@@ -98,8 +99,6 @@ public class Main {
             System.out.println("**********************************************************************");
         }
     }
-// -------------------------------**********************************************************
-
 
 
     private static void exercicio2() {
@@ -119,7 +118,7 @@ public class Main {
                 System.out.println("- " + t.getDescricao() + t.getTempoEstimado() +  " horas")
         );
 
-        System.out.println("\n LISTA DE TAREFAS - SOMENTE DESCRIÇÕES:");
+        System.out.println("\n LISTA DE TAREFAS - SOMENTE DESCRICOES:");
         service.getDescricoes(tarefas).forEach(System.out::println);
 
         System.out.printf("\nTEMPO TOTAL (ALTA): %d horas%n",
@@ -131,8 +130,6 @@ public class Main {
         );
         System.out.println("**********************************************************************");
     }
-
-    //**************************************************************************************
 
 
     // exerc 3
@@ -172,24 +169,37 @@ public class Main {
     }
 
 
-
-
     // exerc 4
     private static void exercicio4() {
-        System.out.println("EXERCICIO 04: ANALISE DE TRANSACOES BANCARIAS💰 ");
+        System.out.println("EXERCICIO 04: ANÁLISE DE TRANSAÇÕES BANCÁRIAS 💰");
 
+        // Dados de exemplo
         List<Transacao> transacoes = List.of(
-                new Transacao("Cliente A", "crédito", 1000.00),
-                new Transacao("Cliente B", "débito", 250.00),
-                new Transacao("Cliente A", "crédito", 500.00)
+                new Transacao("CLIENTE: NOEMI WATSON", "crédito", 1000.00),
+                new Transacao("CLIENTE: ANGELICA DIAS", "débito", 250.00),
+                new Transacao("CLIENTE: JOSE CLEITON", "crédito", 500.00),
+                new Transacao("CLIENTE: MATHEUS OLIVEIRA", "débito", 300.00)
         );
 
         AnaliseTransacoesService service = new AnaliseTransacoesService();
 
-        System.out.println("\n💸 Resumo financeiro:");
-        System.out.printf("Créditos: R$%.2f%n",
-                service.calculatotalPortipo(transacoes, "crédito"));
-        System.out.printf("Débitos: R$%.2f%n",
-                service.calculatotalPortipo(transacoes, "débito"));
+        System.out.println("\nTRANSAÇÕES DE CRÉDITO:");
+        service.filtrarPorTipo(transacoes, "crédito").forEach(t ->
+                System.out.println("- " + t.getNomeCliente() + ": R$" + t.getValor());
+        );
+
+        System.out.println("\nVALORES DE CRÉDITO:");
+        service.getValoresTransacoes(
+                service.filtrarPorTipo(transacoes, "crédito")
+        ).forEach(valor -> System.out.printf("R$%.2f%n", valor));
+
+
+        System.out.printf("\nTOTAL DE CRÉDITOS: R$%.2f%n",
+                service.calcularTotalPorTipo(transacoes, "crédito"));
+
+
+        service.imprimirResumoTransacoes(transacoes);
+        System.out.println("****************************************************************************");
+
     }
 }
