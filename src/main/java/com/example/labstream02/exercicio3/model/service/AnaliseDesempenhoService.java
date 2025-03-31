@@ -6,21 +6,21 @@ import java.util.stream.Collectors;
 
 public class AnaliseDesempenhoService {
 
-    // Filtra avaliações por departamento
+    // 1. Filtrar avaliações por departamento
     public List<Avaliacao> filtrarPorDepartamento(List<Avaliacao> avaliacoes, String departamento) {
         return avaliacoes.stream()
                 .filter(a -> a.getDepartamento().equalsIgnoreCase(departamento))
                 .collect(Collectors.toList());
     }
 
-    // Retorna apenas nomes dos funcionários
+    // 2. Mapear para lista de nomes
     public List<String> getNomesFuncionarios(List<Avaliacao> avaliacoes) {
         return avaliacoes.stream()
                 .map(Avaliacao::getNomeFuncionario)
                 .collect(Collectors.toList());
     }
 
-    // Calcula média do departamento
+    // 3. Calcular média do departamento
     public double calcularMediaDepartamento(List<Avaliacao> avaliacoes, String departamento) {
         return filtrarPorDepartamento(avaliacoes, departamento).stream()
                 .mapToDouble(Avaliacao::getNota)
@@ -28,7 +28,7 @@ public class AnaliseDesempenhoService {
                 .orElse(0.0);
     }
 
-    // Retorna funcionários acima da média
+    // 4. Funcionários com nota acima da média
     public List<String> getFuncionariosAcimaDaMedia(List<Avaliacao> avaliacoes, String departamento) {
         double media = calcularMediaDepartamento(avaliacoes, departamento);
 

@@ -5,7 +5,6 @@ public class Avaliacao {
     private double nota;
     private String departamento;
 
-    // Construtor
     public Avaliacao(String nomeFuncionario, double nota, String departamento) {
         this.nomeFuncionario = nomeFuncionario;
         this.nota = nota;
@@ -13,15 +12,7 @@ public class Avaliacao {
     }
 
     // Getters
-    public String getNomeFuncionario() {
-        return nomeFuncionario;
-    }
-
-    public double getNota() {
-        return nota;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
+    public String getNomeFuncionario() { return nomeFuncionario; }
+    public double getNota() { return nota; }
+    public String getDepartamento() { return departamento; }
 }

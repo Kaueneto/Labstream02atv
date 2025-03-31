@@ -1,15 +1,16 @@
 package com.example.labstream02.exercicio2.model;
 
+
 public class Tarefa {
     private String descricao;
     private String prioridade; // "alta", "media", "baixa"
-    private int tempoEstimadoHoras;
+    private int tempoEstimado; // em horas
 
     // Construtor
-    public Tarefa(String descricao, String prioridade, int tempoEstimadoHoras) {
+    public Tarefa(String descricao, String prioridade, int tempoEstimado) {
         this.descricao = descricao;
         this.prioridade = prioridade;
-        this.tempoEstimadoHoras = tempoEstimadoHoras;
+        this.tempoEstimado = tempoEstimado;
     }
 
     // Getters
@@ -21,7 +22,11 @@ public class Tarefa {
         return prioridade;
     }
 
+    public int getTempoEstimado() {
+        return tempoEstimado;
+    }
+
     public int getTempoEstimadoHoras() {
-        return tempoEstimadoHoras;
+        return 0;
     }
 }
