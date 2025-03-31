@@ -121,7 +121,7 @@ public class Main {
         System.out.println("\n LISTA DE TAREFAS - SOMENTE DESCRICOES:");
         service.getDescricoes(tarefas).forEach(System.out::println);
 
-        System.out.printf("\nTEMPO TOTAL (ALTA): %d horas%n",
+        System.out.printf("\nTEMPO TOTAL TAREFAS DE ALTA PRIORIDADE: %d horas%n",
                 service.calcularTempoTotalAltas(tarefas));
 
         System.out.println("\nTAREFAS ORDENADAS:");
@@ -148,7 +148,7 @@ public class Main {
         String departamentoAlvo = "TI";
         AnaliseDesempenhoService service = new AnaliseDesempenhoService();
 
-        System.out.println("\n🔍 FUNCIONARIOS DO DEPTO " + departamentoAlvo + ":");
+        System.out.println("\nFUNCIONARIOS DO DEPTO " + departamentoAlvo + ":");
         service.filtrarPorDepartamento(avaliacoes, departamentoAlvo).forEach(a ->
                 System.out.println("- " + a.getNomeFuncionario() + ": " + a.getNota())
         );
@@ -171,7 +171,7 @@ public class Main {
 
     // exerc 4
     private static void exercicio4() {
-        System.out.println("EXERCICIO 04: ANÁLISE DE TRANSAÇÕES BANCÁRIAS 💰");
+        System.out.println("EXERCICIO 04: ANÁLISE DE TRANSAÇÕES BANCÁRIAS ");
 
         // Dados de exemplo
         List<Transacao> transacoes = List.of(
@@ -185,8 +185,9 @@ public class Main {
 
         System.out.println("\nTRANSAÇÕES DE CRÉDITO:");
         service.filtrarPorTipo(transacoes, "crédito").forEach(t ->
-                System.out.println("- " + t.getNomeCliente() + ": R$" + t.getValor());
-        );
+                System.out.println("- " + t.getNomeCliente() + ": R$" + t.getValor()));
+
+
 
         System.out.println("\nVALORES DE CRÉDITO:");
         service.getValoresTransacoes(

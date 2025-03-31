@@ -6,14 +6,13 @@ public class Tarefa {
     private String prioridade; // "alta", "media", "baixa"
     private int tempoEstimado; // em horas
 
-    // Construtor
+
     public Tarefa(String descricao, String prioridade, int tempoEstimado) {
         this.descricao = descricao;
         this.prioridade = prioridade;
         this.tempoEstimado = tempoEstimado;
     }
 
-    // Getters
     public String getDescricao() {
         return descricao;
     }

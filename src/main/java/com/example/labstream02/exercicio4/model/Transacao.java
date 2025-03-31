@@ -11,7 +11,6 @@ public class Transacao {
         this.valor = valor;
     }
 
-    // Getters
     public String getNomeCliente() { return nomeCliente; }
     public String getTipoTransacao() { return tipoTransacao; }
     public double getValor() { return valor; }
